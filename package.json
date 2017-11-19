@@ -1,0 +1,31 @@
+{
+  "name": "my-rename-all",
+  "version": "0.0.1",
+  "description": "Very basic CLI utility written in NodeJS to allow batch renaming all files in the current folder.",
+  "main": "cli.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/papb/my-rename-all.git"
+  },
+  "keywords": [
+    "rename",
+    "files",
+    "cli"
+  ],
+  "author": "Pedro Augusto de Paula Barbosa",
+  "license": "ISC",
+  "bin": {
+    "my-rename-all": "./cli.js"
+  },
+  "bugs": {
+    "url": "https://github.com/papb/my-rename-all/issues"
+  },
+  "homepage": "https://github.com/papb/my-rename-all#readme",
+  "dependencies": {
+    "chalk": "^2.3.0",
+    "slash": "^1.0.0"
+  }
+}
