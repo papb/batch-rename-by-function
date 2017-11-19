@@ -10,11 +10,6 @@ This is done mostly as an exercise for me, but feel free to use it (License is I
 
 If you ended up here, consider a better option instead: [`renamer`](https://github.com/75lb/renamer).
 
-Dependencies
-------------
-
-The only dependency is [`chalk`](https://github.com/chalk/chalk) for colorized console output.
-
 How to use
 ----------
 
@@ -40,6 +35,8 @@ to see all the changes that would be made, and if that's really what you want, e
 my-rename-all -F foo.js
 ```
 
+Should work in Windows and Linux.
+
 Changelog
 ---------
 
@@ -58,6 +55,8 @@ Acknowledgements
 Thanks Rubens Mariuzzo for [this great guide on creating CLI utilities in NodeJS](https://x-team.com/blog/a-guide-to-creating-a-nodejs-command/).
 
 Thanks Sindre Sorhus, Josh Junon and all other contributors for [`chalk`](https://github.com/chalk/chalk).
+
+Thanks Sindre Sorhus for [`slash`](https://github.com/sindresorhus/slash).
 
 
 License

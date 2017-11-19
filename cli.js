@@ -2,6 +2,7 @@
 const [,,...args] = process.argv;
 const fs = require('fs');
 const path = require('path');
+const slash = require('slash');
 const chalk = require('chalk');
 
 const USAGE_TEXT = `    Usage
@@ -48,10 +49,11 @@ if (args.length === 1) {
 	return;
 }
 
+var pathToFunction = slash(path.join(process.cwd(), args[0]));
 try {
-	renamingFunction = require("./" + args[0]);
+	renamingFunction = require(pathToFunction);
 } catch (e) {
-	console.log(chalk.red(`\nError: Unable to require(${"./" + args[0]}).\n`));
+	console.log(chalk.red(`\nError: Unable to require(${pathToFunction}).\n`));
 	return;
 }
 
