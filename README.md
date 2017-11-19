@@ -36,7 +36,7 @@ my-rename-all foo.js
 
 to see all the changes that would be made, and if that's really what you want, execute
 
-````
+```
 my-rename-all -F foo.js
 ```
 
