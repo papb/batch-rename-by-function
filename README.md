@@ -55,7 +55,7 @@ Every now and then I might improve this a bit...
 Acknowledgements
 --------------------------------------
 
-Thanks Rubens Mariuzzo for [https://x-team.com/blog/a-guide-to-creating-a-nodejs-command/](this great guide on creating CLI utilities in NodeJS).
+Thanks Rubens Mariuzzo for [this great guide on creating CLI utilities in NodeJS](https://x-team.com/blog/a-guide-to-creating-a-nodejs-command/).
 
 Thanks Sindre Sorhus, Josh Junon and all other contributors for [`chalk`](https://github.com/chalk/chalk).
 
