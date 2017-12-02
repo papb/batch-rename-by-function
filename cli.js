@@ -7,7 +7,7 @@ const chalk = require('chalk');
 
 const USAGE_TEXT = `    Usage
     
-        $ rename-all <js-file-which-exports-the-renaming-function>
+        $ my-rename-all <js-file-which-exports-the-renaming-function>
 
     Options
     
@@ -15,8 +15,8 @@ const USAGE_TEXT = `    Usage
 
     Examples
     
-        $ rename-all myRename.js
-        $ rename-all -F myRename.js`;
+        $ my-rename-all myRename.js
+        $ my-rename-all -F myRename.js`;
 
 // ------------------ PARSE ARGS ------------------ //
 
@@ -49,7 +49,7 @@ if (args.length === 1) {
 	return;
 }
 
-var pathToFunction = slash(path.join(process.cwd(), args[0]));
+var pathToFunction = slash(path.join(process.cwd(), arg));
 try {
 	renamingFunction = require(pathToFunction);
 } catch (e) {
