@@ -4,7 +4,7 @@ const VERSION = "0.0.1";
 
 const USAGE_TEXT = `    Usage
     
-        $ my-rename-all <js-file-which-exports-the-renaming-function>
+        $ batch-rename-by-function <js-file-which-exports-the-renaming-function>
         
         Takes the function exported by the JS file (by module.exports)
         and applies it to every file present in the current folder,
@@ -24,8 +24,8 @@ const USAGE_TEXT = `    Usage
 
     Examples
     
-        $ my-rename-all myRenamer.js
-        $ my-rename-all -F myRenamer.js`;
+        $ batch-rename-by-function myRenamer.js
+        $ batch-rename-by-function -F myRenamer.js`;
 
 // ------------------ LOG & ERROR WRAPPERS ------------------ //
 
@@ -39,7 +39,7 @@ function say(str) {
 }
 function errorDontWorryExit(message) {
     say(chalk.red("Error: " + message));
-    say("Try: my-rename-all --help");
+    say("Try: batch-rename-by-function --help");
     say(chalk.yellow("Don't worry. All files remained unchanged."));
     process.exit(1);
 }
@@ -61,7 +61,7 @@ if (!args.length || (args.length === 1 && (args[0] === "--help" || args[0] === '
 }
 
 if (args.length === 1 && (args[0] === "--version" || args[0] === '-v')) {
-    say("my-rename-all v" + VERSION);
+    say("batch-rename-by-function v" + VERSION);
     process.exit();
 }
 

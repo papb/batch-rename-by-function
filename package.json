@@ -1,21 +1,21 @@
 {
-  "name": "my-rename-all",
+  "name": "batch-rename-by-function",
   "version": "0.0.1",
   "description": "Batch rename files and folders by providing a JS function",
   "main": "cli.js",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/papb/my-rename-all.git"
+    "url": "git+https://github.com/papb/batch-rename-by-function.git"
   },
   "author": "Pedro Augusto de Paula Barbosa",
   "license": "MIT",
   "bin": {
-    "my-rename-all": "./cli.js"
+    "batch-rename-by-function": "./cli.js"
   },
   "bugs": {
-    "url": "https://github.com/papb/my-rename-all/issues"
+    "url": "https://github.com/papb/batch-rename-by-function/issues"
   },
-  "homepage": "https://github.com/papb/my-rename-all#readme",
+  "homepage": "https://github.com/papb/batch-rename-by-function#readme",
   "dependencies": {
     "chalk": "^2.3.0",
     "slash": "^1.0.0"
