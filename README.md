@@ -3,7 +3,7 @@ my-rename-all
 
 Batch rename files and folders by providing a JS function.
 
-DISCLAIMER: I wrote this mostly to improve my own NodeJS skills. Don't forget to consider the more known module, [`renamer`](https://github.com/75lb/renamer). Comparison:
+DISCLAIMER: I wrote this mostly to improve my own NodeJS skills. Don't forget to consider the more known module, [`renamer`](https://github.com/75lb/renamer). Brief comparison:
 
 * `renamer` has support for renaming nested files, while `my-rename-all` does not.
 * `my-rename-all` allows you to write arbitrarily complicated javascript to calculate the new names for your files, while `renamer` does not support accepting a custom transform function yet (at the time of this writing, 2017-12-08, since apparently it will be added in the future).
