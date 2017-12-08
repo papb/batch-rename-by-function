@@ -4,6 +4,7 @@ batch-rename-by-function
 [![npm package](https://nodei.co/npm/batch-rename-by-function.png?downloads=true&downloadRank=true&stars=true)](https://nodei.co/npm/batch-rename-by-function/)
 
 [![NPM version][npm-version-image]][npm-url]
+[![Dependency Status](https://david-dm.org/papb/batch-rename-by-function.svg)](https://david-dm.org/papb/batch-rename-by-function)
 [![MIT License][license-image]][license-url]
 [![NPM downloads][npm-downloads-image]][npm-url]
 [![contributions welcome](https://img.shields.io/badge/contributions-welcome-brightgreen.svg)](https://github.com/papb/batch-rename-by-function/issues)
