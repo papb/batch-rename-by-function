@@ -45,7 +45,7 @@ The commands `batch-rename-by-function --help` and `batch-rename-by-function --v
 Changelog
 ---------
 
-v0.0.1: Initial commit stuff, not ready to use yet
+v1.0.0: Initial release
 
 
 Acknowledgements

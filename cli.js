@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 
-const VERSION = "0.0.1";
+const VERSION = "1.0.0";
 
 const USAGE_TEXT = `    Usage
     
