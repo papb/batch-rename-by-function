@@ -18,6 +18,10 @@ const USAGE_TEXT = `    Usage
             Perform the actual renaming (without it, for safety, just
             a preview is made)
 
+        --version
+
+        --help
+
     Examples
     
         $ my-rename-all myRenamer.js
