@@ -1,5 +1,12 @@
 batch-rename-by-function
-=============
+========================
+
+[![npm package](https://nodei.co/npm/batch-rename-by-function.png?downloads=true&downloadRank=true&stars=true)](https://nodei.co/npm/batch-rename-by-function/)
+
+[![NPM version][npm-version-image]][npm-url]
+[![MIT License][license-image]][license-url]
+[![NPM downloads][npm-downloads-image]][npm-url]
+[![contributions welcome](https://img.shields.io/badge/contributions-welcome-brightgreen.svg)](https://github.com/papb/batch-rename-by-function/issues)
 
 Batch rename files and folders by providing a JS function.
 
@@ -62,3 +69,10 @@ License
 --------------------------------------
 
 MIT
+
+[npm-url]: https://npmjs.org/package/batch-rename-by-function
+[npm-version-image]: https://img.shields.io/npm/v/batch-rename-by-function.svg
+[npm-downloads-image]: https://img.shields.io/npm/dt/batch-rename-by-function.svg
+
+[license-image]: http://img.shields.io/badge/license-MIT-blue.svg
+[license-url]: LICENSE
