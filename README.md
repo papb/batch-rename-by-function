@@ -1,14 +1,7 @@
 my-rename-all
 =============
 
-What is this?
--------------
-
 This is a very basic CLI utility written in NodeJS to allow batch renaming all files in the current folder.
-
-This is done mostly as an exercise for me, but feel free to use it (License is ISC).
-
-If you ended up here, consider a better option instead: [`renamer`](https://github.com/75lb/renamer).
 
 How to use
 ----------
@@ -35,7 +28,20 @@ to see all the changes that would be made, and if that's really what you want, e
 my-rename-all -F foo.js
 ```
 
+to force the actual renaming.
+
 Should work in Windows and Linux.
+
+The file `foo.js` doesn't really have to be in the same folder as the renames (just give the relative path to it). Also, `my-rename-all` will automatically skip your JS file (in this example, `foo.js`) if it is present in the current directory (instead of trying to rename it as well).
+
+Similar modules
+---------------
+
+There is already another famous module, [`renamer`](https://github.com/75lb/renamer), with a very similar idea. Differences:
+
+* `my-rename-all` allows you to write arbitrarily complicated javascript to calculate the new names for your files
+* `renamer` has support for renaming nested files, while `my-rename-all` (currently!) does not.
+* You don't have to know javascript to use `renamer`, but you must know it to use `my-rename-all`.
 
 Changelog
 ---------
