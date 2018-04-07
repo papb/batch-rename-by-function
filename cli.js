@@ -12,6 +12,10 @@ const USAGE_TEXT = `    Usage
         including folders (with the exception of the passed JS file
         itself, in case it is in the current folder).
 
+        The renaming function receives two parameters. The first is the name
+        of the object (file/directory), and the second is a boolean which is
+        true iff it is a directory. This way directories can be easily skipped.
+
     Options
     
         --force, -F
@@ -125,7 +129,9 @@ fileNames.forEach(name => {
         return;
     }
 
-    var renamed = renamingFunction(name);
+    var isDirectory = fs.lstatSync(name).isDirectory();
+
+    var renamed = renamingFunction(name, isDirectory);
 
     if (typeof renamed !== "string") {
         errorDontWorryExit(`The Renaming Function returned non-string for the input "${name}"!`);
