@@ -48,13 +48,18 @@ Should work in Windows and Linux.
 
 The file `foo.js` doesn't really have to be in the same folder as the renames (just give the relative path for it). Also, `batch-rename-by-function` will automatically skip your JS file (in this example, `foo.js`) if it is present in the current directory (instead of trying to rename it as well).
 
+The renaming function also receives a second boolean parameter, `isDirectory`, that can be useful:
+
+```javascript
+module.exports = (filename, isDirectory) => {
+    // Skip folders
+    if (isDirectory) return filename;
+
+    // ...
+};
+```
+
 The commands `batch-rename-by-function --help` and `batch-rename-by-function --version` are also available.
-
-Changelog
----------
-
-v1.0.0: Initial release
-
 
 Acknowledgements
 --------------------------------------
