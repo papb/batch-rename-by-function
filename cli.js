@@ -1,4 +1,5 @@
 #!/usr/bin/env node
+"use strict";
 
 const VERSION = "1.0.0";
 
@@ -81,7 +82,7 @@ if (args.length === 1) {
 } else if (args[1] === "--force" || args[1] === "-F") {
     arg = args[0];
     force = true;
-} else if (args.length == 2) {
+} else if (args.length === 2) {
     errorDontWorryExit("Error: Unable to parse args.");
 }
 
