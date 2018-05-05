@@ -74,7 +74,7 @@ Thanks Sindre Sorhus for [`slash`](https://github.com/sindresorhus/slash).
 License
 --------------------------------------
 
-MIT
+MIT (c) Pedro Augusto de Paula Barbosa
 
 [npm-url]: https://npmjs.org/package/batch-rename-by-function
 [npm-version-image]: https://img.shields.io/npm/v/batch-rename-by-function.svg
