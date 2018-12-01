@@ -12,6 +12,22 @@
   "bin": {
     "batch-rename-by-function": "./cli.js"
   },
+  "engines": {
+    "node": ">=6.0.0"
+  },
+  "scripts": {
+    "lint": "eslint ."
+  },
+  "files": [
+    "cli.js"
+  ],
+  "keywords": [
+    "rename",
+    "files",
+    "folders",
+    "bulk",
+    "batch"
+  ],
   "bugs": {
     "url": "https://github.com/papb/batch-rename-by-function/issues"
   },
