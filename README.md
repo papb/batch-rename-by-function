@@ -3,11 +3,14 @@ batch-rename-by-function
 
 [![npm package](https://nodei.co/npm/batch-rename-by-function.png?downloads=true&downloadRank=true&stars=true)](https://nodei.co/npm/batch-rename-by-function/)
 
-[![NPM version][npm-version-image]][npm-url]
-[![Dependency Status](https://david-dm.org/papb/batch-rename-by-function.svg)](https://david-dm.org/papb/batch-rename-by-function)
-[![MIT License][license-image]][license-url]
-[![NPM downloads][npm-downloads-image]][npm-url]
-[![contributions welcome](https://img.shields.io/badge/contributions-welcome-brightgreen.svg)](https://github.com/papb/batch-rename-by-function/issues)
+[![NPM version][npm-version-badge]][npm-url]
+[![License][license-badge]][license-url]
+[![NPM downloads][npm-downloads-badge]][npm-url]
+[![Dependency Status][dependency-status-badge]](https://david-dm.org/papb/batch-rename-by-function)
+[![Dev Dependency Status][dev-dependency-status-badge]](https://david-dm.org/papb/batch-rename-by-function)
+[![Open Issues][open-issues-badge]](https://github.com/papb/batch-rename-by-function/issues)
+[![Closed Issues][closed-issues-badge]](https://github.com/papb/batch-rename-by-function/issues?q=is%3Aissue+is%3Aclosed)
+[![contributions welcome][contrib-welcome-badge]](https://github.com/papb/batch-rename-by-function/issues)
 
 Batch rename files and folders by providing a JS function.
 
@@ -80,8 +83,12 @@ License
 MIT (c) Pedro Augusto de Paula Barbosa
 
 [npm-url]: https://npmjs.org/package/batch-rename-by-function
-[npm-version-image]: https://img.shields.io/npm/v/batch-rename-by-function.svg
-[npm-downloads-image]: https://img.shields.io/npm/dt/batch-rename-by-function.svg
-
-[license-image]: http://img.shields.io/badge/license-MIT-blue.svg
+[npm-version-badge]: https://badgen.net/npm/v/batch-rename-by-function
+[dependency-status-badge]: https://badgen.net/david/dep/papb/batch-rename-by-function
+[dev-dependency-status-badge]: https://badgen.net/david/dev/papb/batch-rename-by-function
+[npm-downloads-badge]: https://badgen.net/npm/dt/batch-rename-by-function
+[open-issues-badge]: https://badgen.net/github/open-issues/papb/batch-rename-by-function
+[closed-issues-badge]: https://badgen.net/github/closed-issues/papb/batch-rename-by-function
+[contrib-welcome-badge]: https://badgen.net/badge/contributions/welcome/green
+[license-badge]: https://badgen.net/npm/license/batch-rename-by-function
 [license-url]: LICENSE
