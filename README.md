@@ -11,12 +11,6 @@ batch-rename-by-function
 
 Batch rename files and folders by providing a JS function.
 
-DISCLAIMER: I wrote this mostly to improve my own NodeJS skills. Don't forget to consider the more known module, [`renamer`](https://github.com/75lb/renamer). Brief comparison:
-
-* `renamer` has support for renaming nested files, while `batch-rename-by-function` does not.
-* `batch-rename-by-function` allows you to write arbitrarily complicated javascript to calculate the new names for your files, while `renamer` does not support accepting a custom transform function yet (at the time of this writing, 2017-12-08, since apparently it will be added in the future).
-* You don't have to know javascript to use `renamer`, but you must know it to use `batch-rename-by-function`.
-
 How to use
 ----------
 
@@ -60,6 +54,15 @@ module.exports = (filename, isDirectory) => {
 ```
 
 The commands `batch-rename-by-function --help` and `batch-rename-by-function --version` are also available.
+
+Why `batch-rename-by-function`?
+--------------------------------------
+
+A comparison with [`renamer`](https://github.com/75lb/renamer), a more known module for batch renaming:
+
+* `batch-rename-by-function` allows you to write arbitrarily complicated javascript to calculate the new names for your files in a very straightforward way, while to do this with `renamer` you would have to develop a custom plugin.
+* `renamer` has support for renaming nested files, while `batch-rename-by-function` does have it yet (see [#2](https://github.com/papb/batch-rename-by-function/issues/2)).
+* You don't have to know JavaScript to use `renamer`, but you must know it to use `batch-rename-by-function`.
 
 Acknowledgements
 --------------------------------------
