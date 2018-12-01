@@ -1,4 +1,5 @@
 #!/usr/bin/env node
+/* eslint no-process-exit: off */
 "use strict";
 
 const VERSION = "1.1.0";
@@ -74,9 +75,9 @@ if (args.length > 2) {
     errorDontWorryExit("Too many args.");
 }
 
-var renamingFunction = undefined;
-var arg = undefined;
-var force = false;
+let renamingFunction = undefined;
+let arg = undefined;
+let force = false;
 
 if (args.length === 1) {
     arg = args[0];
@@ -90,7 +91,7 @@ if (args.length === 1) {
     errorDontWorryExit("Error: Unable to parse args.");
 }
 
-var pathToFunction = slash(path.join(process.cwd(), arg));
+const pathToFunction = slash(path.join(process.cwd(), arg));
 try {
     renamingFunction = require(pathToFunction);
 } catch (e) {
@@ -118,8 +119,8 @@ say(chalk.yellow("Reminder: folders themselves are included in the process!"));
 const scriptName = path.basename(__filename);
 const fileNames = fs.readdirSync('./');
 const renameList = [];
-var totalAmount = 0;
-var amountUnaltered = 0;
+let totalAmount = 0;
+let amountUnaltered = 0;
 
 // Compute changes
 fileNames.forEach(name => {
@@ -129,9 +130,9 @@ fileNames.forEach(name => {
         return;
     }
 
-    var isDirectory = fs.lstatSync(name).isDirectory();
+    const isDirectory = fs.lstatSync(name).isDirectory();
 
-    var renamed = renamingFunction(name, isDirectory);
+    const renamed = renamingFunction(name, isDirectory);
 
     if (typeof renamed !== "string") {
         errorDontWorryExit(`The Renaming Function returned non-string for the input "${name}"!`);
