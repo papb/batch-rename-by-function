@@ -29,16 +29,16 @@ module.exports = filename => filename.replace("Season 1 - ", "Season 01 - ");
 And then execute
 
 ```
-batch-rename-by-function my-renamer.js --dry-run
+batch-rename-by-function my-renamer.js
 ```
 
 to see all the changes that would be made (without actually renaming anything, hence `dry-run`), and if that's really what you want, execute
 
 ```
-batch-rename-by-function my-renamer.js
+batch-rename-by-function my-renamer.js --no-dry-run
 ```
 
-to perform the actual renaming. Note that `batch-rename-by-function` acts on every file/folder in the current working directory.
+to perform the actual renaming. Note that `batch-rename-by-function` acts on every file/folder in the current working directory, and runs in `dry-run` mode (i.e. simulation mode) by default. To actually rename files, the `--no-dry-run` options must be set (or its alias `--force` or even `-F`).
 
 The file `my-renamer.js` doesn't have to be in the same folder as the renames (just give the relative path for it). Also, `batch-rename-by-function` will automatically skip your JS file (in this example, `my-renamer.js`) if it is present in the current directory (instead of trying to rename it as well).
 

@@ -14,13 +14,14 @@ yargs.example("batch-rename-by-function myRenamer.js");
 //     type: "boolean",
 //     default: false
 // });
-yargs.option("dry-run", {
-    describe: "Show which renames would happen without actually performing them",
+yargs.option("no-dry-run", {
+    alias: ["force", "F"],
+    describe: "Perform the actual renaming (if omitted, a dry-run will occur instead, i.e., just a simulation of the renamings).",
     type: "boolean",
     default: false
 });
 yargs.check(argv => {
-    argv.dryRun = argv["dry-run"];
+    argv.dryRun = !argv["no-dry-run"];
 
     // Check positionals
     const fileName = argv._[0];
@@ -55,9 +56,9 @@ function errorDontWorryExit(message) {
 }
 
 if (args.dryRun) {
-    print(`In '--dry-run' mode: files will not be really renamed (only a preview will be given).`, "green");
+    print(`In dry-run mode: files will not be actually renamed (only a preview will be given).`, "green");
 } else {
-    print(`Not in '--dry-run' mode: files will be really renamed.`, "yellow");
+    print(`Not in dry-run mode: files will be actually renamed.`, "yellow");
 }
 
 print(`Reminder: folders themselves are included in the process!`, "yellow");
