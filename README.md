@@ -66,10 +66,11 @@ Usage: batch-rename-by-function path/to/my/renamer/file.js
   directory. This way directories can be easily skipped, if desired.
 
 Options:
-  --help     Show help                                                 [boolean]
-  --version  Show version number                                       [boolean]
-  --dry-run  Show which renames would happen without actually performing them
-                                                      [boolean] [default: false]
+  --help                     Show help                                 [boolean]
+  --version                  Show version number                       [boolean]
+  --no-dry-run, --force, -F  Perform the actual renaming (if omitted, a dry-run
+                             will occur instead, i.e., just a simulation of the
+                             renamings).              [boolean] [default: false]
 
 Examples:
   batch-rename-by-function myRenamer.js
