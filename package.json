@@ -34,7 +34,7 @@
   "homepage": "https://github.com/papb/batch-rename-by-function#readme",
   "dependencies": {
     "chalk": "^2.3.0",
-    "slash": "^2.0.0"
+    "fs-jetpack": "^2.2.0"
   },
   "devDependencies": {
     "eslint": "^5.9.0",

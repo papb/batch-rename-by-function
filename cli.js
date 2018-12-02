@@ -52,9 +52,7 @@ function errorDontWorryExit(message) {
 
 // ------------------ IMPORTS ------------------ //
 
-const fs = require('fs');
-const path = require('path');
-const slash = require('slash');
+const jetpack = require('fs-jetpack');
 const chalk = require('chalk');
 
 // ------------------ PARSE ARGS ------------------ //
@@ -91,11 +89,10 @@ if (args.length === 1) {
     errorDontWorryExit("Error: Unable to parse args.");
 }
 
-const pathToFunction = slash(path.join(process.cwd(), arg));
 try {
-    renamingFunction = require(pathToFunction);
+    renamingFunction = require(arg);
 } catch (e) {
-    errorDontWorryExit(`Unable to require("${pathToFunction}").`);
+    errorDontWorryExit(`Unable to require("${arg}").`);
 }
 
 if (typeof renamingFunction !== "function") {
@@ -116,8 +113,7 @@ say(chalk.yellow("Reminder: folders themselves are included in the process!"));
 
 // ------------------ READ THINGS ------------------ //
 
-const scriptName = path.basename(__filename);
-const fileNames = fs.readdirSync('./');
+const fileNames = jetpack.list('.');
 const renameList = [];
 let totalAmount = 0;
 let amountUnaltered = 0;
@@ -125,12 +121,12 @@ let amountUnaltered = 0;
 // Compute changes
 fileNames.forEach(name => {
 
-    if (name === scriptName || name === args[0] || name === args[0] + ".js") {
+    if (name === args[0] || name === args[0] + ".js") {
         say(chalk.green(`Skipping file: ${name}.`));
         return;
     }
 
-    const isDirectory = fs.lstatSync(name).isDirectory();
+    const isDirectory = jetpack.exists(name) === "dir";
 
     const renamed = renamingFunction(name, isDirectory);
 
@@ -162,7 +158,7 @@ if (amountUnaltered > 0) {
 if (totalAmount > amountUnaltered) {
     say(chalk.yellow(force ? "Altered files:" : "Files to be altered:") + "\n");
     renameList.filter(rename => rename.old !== rename.new).forEach(rename => {
-        if (force) fs.renameSync(rename.old, rename.new);
+        if (force) jetpack.rename(rename.old, rename.new);
         console.log(`    "${rename.old}" -> "${rename.new}".`);
     });
 }
