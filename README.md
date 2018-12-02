@@ -14,8 +14,7 @@ batch-rename-by-function
 
 Batch rename files and folders by providing a JS function.
 
-How to use
-----------
+# How to use
 
 ```
 npm install -g batch-rename-by-function
@@ -58,8 +57,7 @@ module.exports = (filename, isDirectory) => {
 
 The commands `batch-rename-by-function --help` and `batch-rename-by-function --version` are also available.
 
-Why `batch-rename-by-function`?
---------------------------------------
+# Why `batch-rename-by-function`?
 
 A comparison with [`renamer`](https://github.com/75lb/renamer), a more known module for batch renaming:
 
@@ -67,18 +65,19 @@ A comparison with [`renamer`](https://github.com/75lb/renamer), a more known mod
 * `renamer` has support for renaming nested files, while `batch-rename-by-function` does have it yet (see [#2](https://github.com/papb/batch-rename-by-function/issues/2)).
 * You don't have to know JavaScript to use `renamer`, but you must know it to use `batch-rename-by-function`.
 
-Acknowledgements
---------------------------------------
+# Acknowledgements
 
 Thanks Rubens Mariuzzo for [this great guide on creating CLI utilities in NodeJS](https://x-team.com/blog/a-guide-to-creating-a-nodejs-command/).
 
-Thanks Sindre Sorhus, Josh Junon and all other contributors for [`chalk`](https://github.com/chalk/chalk).
+# Contributing
 
-Thanks Sindre Sorhus for [`slash`](https://github.com/sindresorhus/slash).
+Any contribution is very welcome. Feel free to open an issue about anything: questions, suggestions, feature requests, bugs, improvements, mistakes, whatever. I will be always looking.
 
+# Changelog
 
-License
---------------------------------------
+The changelog is available in [CHANGELOG.md](CHANGELOG.md).
+
+# License
 
 MIT (c) Pedro Augusto de Paula Barbosa
 
