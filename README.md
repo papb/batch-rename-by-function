@@ -20,7 +20,7 @@ Batch rename files and folders by providing a JS function.
 npm install -g batch-rename-by-function
 ```
 
-Navigate to the folder you want, and create a JS file there, `foo.js`, like this:
+Navigate to the folder you want, and create a JS file there, `my-renamer.js`, like this:
 
 ```javascript
 module.exports = filename => filename.replace("Season 1 - ", "Season 01 - ");
@@ -29,20 +29,18 @@ module.exports = filename => filename.replace("Season 1 - ", "Season 01 - ");
 And then execute
 
 ```
-batch-rename-by-function foo.js
+batch-rename-by-function my-renamer.js --dry-run
 ```
 
-to see all the changes that would be made, and if that's really what you want, execute
+to see all the changes that would be made (without actually renaming anything, hence `dry-run`), and if that's really what you want, execute
 
 ```
-batch-rename-by-function foo.js --force
+batch-rename-by-function my-renamer.js
 ```
 
-to force the actual renaming.
+to perform the actual renaming. Note that `batch-rename-by-function` acts on every file/folder in the current working directory.
 
-Should work in Windows and Linux.
-
-The file `foo.js` doesn't really have to be in the same folder as the renames (just give the relative path for it). Also, `batch-rename-by-function` will automatically skip your JS file (in this example, `foo.js`) if it is present in the current directory (instead of trying to rename it as well).
+The file `my-renamer.js` doesn't have to be in the same folder as the renames (just give the relative path for it). Also, `batch-rename-by-function` will automatically skip your JS file (in this example, `my-renamer.js`) if it is present in the current directory (instead of trying to rename it as well).
 
 The renaming function also receives a second boolean parameter, `isDirectory`, that can be useful:
 
@@ -55,7 +53,27 @@ module.exports = (filename, isDirectory) => {
 };
 ```
 
-The commands `batch-rename-by-function --help` and `batch-rename-by-function --version` are also available.
+The commands `batch-rename-by-function --help` and `batch-rename-by-function --version` are also available:
+
+```
+Usage: batch-rename-by-function path/to/my/renamer/file.js
+
+  Applies the function exported by the given JS file on every file present in
+  the current folder, except the given JS file (if present), including folders.
+
+  The renaming function receives two parameters. The first is the name of the
+  object (file/directory), and the second is a boolean which is true iff it is a
+  directory. This way directories can be easily skipped, if desired.
+
+Options:
+  --help     Show help                                                 [boolean]
+  --version  Show version number                                       [boolean]
+  --dry-run  Show which renames would happen without actually performing them
+                                                      [boolean] [default: false]
+
+Examples:
+  batch-rename-by-function myRenamer.js
+```
 
 # Why `batch-rename-by-function`?
 
