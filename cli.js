@@ -77,7 +77,8 @@ for (const name of fileNames) {
     }
 
     const isDirectory = jetpack.exists(name) === "dir";
-    const renamed = args.renamer(name, isDirectory);
+    let renamed = args.renamer(name, isDirectory);
+    if (renamed === null || renamed === undefined) renamed = name;
 
     if (typeof renamed !== "string") {
         errorDontWorryExit(`The renaming function returned non-string for the input "${name}"!`);
