@@ -42,12 +42,19 @@ to perform the actual renaming. Note that `batch-rename-by-function` acts on eve
 
 The file `my-renamer.js` doesn't have to be in the same folder as the renames (just give the relative path for it). Also, `batch-rename-by-function` will automatically skip your JS file (in this example, `my-renamer.js`) if it is present in the current directory (instead of trying to rename it as well).
 
-The renaming function also receives a second boolean parameter, `isDirectory`, that can be useful:
+To rename recursively, i.e., rename nested files/folders as well, just use the `--recursive` option (or its alias, `--nested`). This way nested files/folders will be navigated too.
+
+The renaming function also receives a second parameter, `data`, which is an object that can be useful:
 
 ```javascript
-module.exports = (filename, isDirectory) => {
+module.exports = (filename, data) => {
     // Skip folders
-    if (isDirectory) return filename;
+    if (data.isDirectory) return filename;
+
+    // Use data.parentFolder to get the relative path to the parent folder
+    
+    // Use data.depth to know how deep you are in the recursive calls
+    // (recall to use the --recursive option to rename recursively)
 
     // ...
 };
@@ -62,12 +69,14 @@ Usage: batch-rename-by-function path/to/my/renamer/file.js
   the current folder, except the given JS file (if present), including folders.
 
   The renaming function receives two parameters. The first is the name of the
-  object (file/directory), and the second is a boolean which is true iff it is a
-  directory. This way directories can be easily skipped, if desired.
+  object (file/directory), and the second is a data object with three fields:
+  isDirectory (boolean), depth (int) and parentFolder (string).
 
 Options:
   --help                     Show help                                 [boolean]
   --version                  Show version number                       [boolean]
+  --recursive, --nested      Whether to rename nested files
+                                                      [boolean] [default: false]
   --no-dry-run, --force, -F  Perform the actual renaming (if omitted, a dry-run
                              will occur instead, i.e., just a simulation of the
                              renamings).              [boolean] [default: false]
@@ -81,7 +90,6 @@ Examples:
 A comparison with [`renamer`](https://github.com/75lb/renamer), a more known module for batch renaming:
 
 * `batch-rename-by-function` allows you to write arbitrarily complicated javascript to calculate the new names for your files in a very straightforward way, while to do this with `renamer` you would have to develop a custom plugin.
-* `renamer` has support for renaming nested files, while `batch-rename-by-function` does have it yet (see [#2](https://github.com/papb/batch-rename-by-function/issues/2)).
 * You don't have to know JavaScript to use `renamer`, but you must know it to use `batch-rename-by-function`.
 
 # Acknowledgements

@@ -1,19 +1,21 @@
 #!/usr/bin/env node
-/* eslint no-process-exit: off */
 "use strict";
 
+global.Promise = require("bluebird");
+
+// --------------- SETUP YARGS --------------- //
+
 const jetpack = require("fs-jetpack");
-const chalk = require("chalk");
 const yargs = require("yargs");
 
-yargs.usage(`\nUsage: batch-rename-by-function path/to/my/renamer/file.js\n\n  Applies the function exported by the given JS file on every file present in the current folder, except the given JS file (if present), including folders.\n\n  The renaming function receives two parameters. The first is the name of the object (file/directory), and the second is a boolean which is true iff it is a directory. This way directories can be easily skipped, if desired.`);
+yargs.usage(`\nUsage: batch-rename-by-function path/to/my/renamer/file.js\n\n  Applies the function exported by the given JS file on every file present in the current folder, except the given JS file (if present), including folders.\n\n  The renaming function receives two parameters. The first is the name of the object (file/directory), and the second is a data object with three fields: isDirectory (boolean), depth (int) and parentFolder (string).`);
 yargs.example("batch-rename-by-function myRenamer.js");
-// yargs.option("nested", {
-//     alias: "recursive",
-//     describe: "Whether to rename nested files",
-//     type: "boolean",
-//     default: false
-// });
+yargs.option("recursive", {
+    alias: "nested",
+    describe: "Whether to rename nested files",
+    type: "boolean",
+    default: false
+});
 yargs.option("no-dry-run", {
     alias: ["force", "F"],
     describe: "Perform the actual renaming (if omitted, a dry-run will occur instead, i.e., just a simulation of the renamings).",
@@ -29,7 +31,7 @@ yargs.check(argv => {
     const fileExists = jetpack.exists(fileName);
     if (!fileExists) throw new Error("Invalid argument: file not found.");
     if (fileExists !== "file") throw new Error("Invalid argument: not a file.");
-    argv.fileName = fileName.endsWith(".js") ? fileName : fileName + ".js";
+    argv.renamerFileName = fileName.endsWith(".js") ? fileName : fileName + ".js";
     try {
         argv.renamer = require(jetpack.path(fileName));
     } catch (e) {
@@ -43,90 +45,62 @@ yargs.check(argv => {
 });
 const args = yargs.argv;
 
-// ------------------ LOG & ERROR WRAPPERS ------------------ //
+// --------------- DO EVERYTHING --------------- //
 
-function print(str, color) {
-    console.log("\n" + (color ? chalk[color](str) : str));
-}
-function errorDontWorryExit(message) {
-    print(`Error: ${message}`, "red");
-    print(`Try: batch-rename-by-function --help`);
-    print(`Don't worry. All files remained unchanged.`, "yellow");
-    process.exit(1);
-}
+const print = require("./lib/print");
+const computeRenames = require("./lib/compute-renames");
+const printUnaltered = require("./lib/print-unaltered");
+const getConflictsMessage = require("./lib/get-conflicts-message");
+const printSummary = require("./lib/print-summary");
+const buildRenameCalls = require("./lib/build-rename-calls");
+const renamer = require("./lib/smart-renamer");
 
 if (args.dryRun) {
-    print(`In dry-run mode: files will not be actually renamed (only a preview will be given).`, "green");
+    print(`In dry-run mode: files will not be actually renamed (only a preview will be given) [DEFAULT].`, "green");
 } else {
     print(`Not in dry-run mode: files will be actually renamed.`, "yellow");
 }
 
 print(`Reminder: folders themselves are included in the process!`, "yellow");
 
-// ------------------ READ THINGS ------------------ //
+const renamingMap = computeRenames(args.renamer, args.recursive ? Infinity : 0, args.renamerFileName);
 
-const fileNames = jetpack.list('.');
-const renameList = [];
-let totalAmount = 0;
-let amountUnaltered = 0;
+printUnaltered(renamingMap);
 
-// Compute changes
-for (const name of fileNames) {
-    if (name === args.fileName) {
-        print(`Skipping file: ${name}.`, "green");
-        continue;
-    }
+const renameCalls = buildRenameCalls(renamingMap);
 
-    const isDirectory = jetpack.exists(name) === "dir";
-    let renamed = args.renamer(name, isDirectory);
-    if (renamed === null || renamed === undefined) renamed = name;
-
-    if (typeof renamed !== "string") {
-        errorDontWorryExit(`The renaming function returned non-string for the input "${name}"!`);
-    }
-    if (renamed.length === 0) {
-        errorDontWorryExit(`The renaming function returned empty string for the input "${name}"!`);
-    }
-
-    renameList.push({ old: name, new: renamed });
-
-    totalAmount++;
-    if (name === renamed) amountUnaltered++;
-}
-
-// ------------------ DO THE MAGIC ------------------ //
-
-if (amountUnaltered > 0) {
-    print("Unaltered files:", "green");
-    renameList.filter(rename => rename.old === rename.new).forEach(rename => {
-        console.log(`    ${rename.old}`);
-    });
-}
-if (totalAmount > amountUnaltered) {
-    print(`${args.dryRun ? "Files to be altered" : "Altered files"}:\n`, "yellow");
-    const toBeAltered = renameList.filter(rename => rename.old !== rename.new);
-    for (const rename of toBeAltered) {
-        if (!args.dryRun) jetpack.rename(rename.old, rename.new);
-        console.log(`    "${rename.old}" -> "${rename.new}".`);
-    }
-}
-
-// ------------------ COMMAND SUMMARY ------------------ //
+const conflictsMessage = getConflictsMessage(renameCalls.conflicts);
+if (conflictsMessage) print.errorDontWorryExit(conflictsMessage);
 
 if (args.dryRun) {
-    print(`Preview finished.`, "blue");
-    print([
-        `    Total files: ${totalAmount}.`,
-        `    Files to be altered: ${totalAmount - amountUnaltered}.`,
-        `    Files that will remain unaltered: ${amountUnaltered}.`
-    ].join("\n"));
-} else {
-    print(`Finished renaming.`, "blue");
-    print([
-        `    Total files: ${totalAmount}.`,
-        `    Altered files: ${totalAmount - amountUnaltered}.`,
-        `    Unaltered files: ${amountUnaltered}.`
-    ].join("\n"));
-}
 
-// ----------------------------------------------------- //
+    if (renameCalls.length > 0) {
+        print(`Files to be altered:\n`, "yellow");
+        for (const renameCall of renameCalls) {
+            print(`    "${renameCall[0]}" -> "${renameCall[1]}".`, { newLine: false });
+        }
+    } else {
+        print(`No files to be altered.`, "green");
+    }
+    printSummary(renamingMap, true);
+
+} else {
+
+    Promise.try(() => {
+        if (renameCalls.length > 0) {
+            print(`Altered files:\n`, "yellow");
+            return Promise.mapSeries(renameCalls, renameCall => {
+                return renamer.async(renameCall[0], renameCall[1]).then(() => {
+                    print(`    "${renameCall[0]}" -> "${renameCall[1]}".`, { newLine: false });
+                });
+            }).then(() => {
+                return renamer.executePostponedRenames.async();
+            });
+        } else {
+            print(`No altered files.`, "green");
+        }
+    }).then(() => {
+        printSummary(renamingMap, false);
+    });
+
+}

@@ -7,7 +7,6 @@
     "extends": ["eslint:recommended", "plugin:node/recommended"],
     "rules": {
         "eqeqeq": ["error", "always"],
-        "no-console": "off",
         "no-extra-semi": "error",
         "no-return-assign": "error",
         "no-throw-literal": "error",
